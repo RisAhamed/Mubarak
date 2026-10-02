@@ -1,0 +1,227 @@
+/* ============================================================
+   MUBARAK MERCANTILE — decorative video layers
+   ------------------------------------------------------------
+   Layering contract (bottom -> top):
+     0  .video-poster / .video      (z-index 0)
+     1  .video-overlay              (z-index 1)
+     10 .content-layer              (headings, cards, CTAs, forms)
+   Videos are decorative: aria-hidden, pointer-events:none,
+   never receive focus, never sit above content or controls.
+   ============================================================ */
+
+/* ---------- Hosts (section / frame that owns a layer) ---------- */
+.video-host{position:relative; overflow:hidden;}
+
+.video-layer{
+  position:absolute; inset:0;
+  z-index:0;
+  overflow:hidden;
+  opacity:var(--video-opacity, 1);
+  pointer-events:none;
+}
+
+/* ---------- Shared pieces ---------- */
+.video-poster{
+  position:absolute; inset:0;
+  z-index:0;
+  background-color:var(--roast);
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+.video{
+  position:absolute; inset:0;
+  z-index:0;
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  object-fit:cover;
+  object-position:var(--video-position, center);
+  opacity:1;
+  pointer-events:none;
+  transition:opacity .85s ease;
+}
+/* is-loading = no usable frame yet, so the poster layer underneath shows. */
+.video.is-loading,
+.video.is-failed{opacity:0;}
+
+/* Inside a wrapped layer the fade applies to poster + video together, so
+   --video-opacity never dims the overlay (which protects text contrast). */
+.video-layer > .video,
+.video-layer > .video-poster{opacity:var(--video-opacity, 1);}
+.video-layer > .video.is-loading,
+.video-layer > .video.is-failed{opacity:0;}
+
+/* Before JS wraps them, a background video is a direct child of its
+   host and has to carry the layer opacity itself. */
+.video-host > .video{opacity:var(--video-opacity, 1);}
+.video-host > .video.is-loading,
+.video-host > .video.is-failed{opacity:0;}
+
+.video-overlay{
+  position:absolute; inset:0;
+  z-index:1;
+  pointer-events:none;
+}
+
+/* Everything that is actually read, clicked or typed into sits above. */
+.content-layer{position:relative; z-index:10;}
+
+/* ---------- Overlay treatments ---------- */
+.ov-dark{
+  background:linear-gradient(180deg,
+    rgba(24,21,18,.90) 0%,
+    rgba(24,21,18,.34) 40%,
+    rgba(24,21,18,.54) 70%,
+    rgba(24,21,18,.93) 100%);
+}
+.ov-cta{
+  background:
+    radial-gradient(115% 85% at 50% 50%, rgba(24,21,18,.34) 0%, rgba(24,21,18,.78) 100%),
+    linear-gradient(180deg, rgba(24,21,18,.58), rgba(24,21,18,.72));
+}
+.ov-paper{
+  background:linear-gradient(90deg,
+    rgba(255,253,246,.94) 0%,
+    rgba(255,253,246,.70) 46%,
+    rgba(255,253,246,.84) 100%);
+}
+.ov-soft{
+  background:linear-gradient(180deg,
+    rgba(38,20,13,.16) 0%,
+    rgba(38,20,13,.02) 42%,
+    rgba(38,20,13,.30) 100%);
+}
+.ov-none{background:none;}
+
+/* ---------- Contained frames (feature cards, side panels) ---------- */
+.video-frame{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:var(--roast);
+  border:1px solid var(--line);
+  border-radius:22px;
+  box-shadow:0 26px 60px rgba(38,20,13,.16);
+}
+.video-frame .video-poster,
+.video-frame .video{z-index:0;}
+.video-frame .video-overlay{z-index:1;}
+.video-frame--feature{aspect-ratio:4 / 3;}
+.video-frame--panel{aspect-ratio:16 / 10;}
+@media (max-width:900px){
+  .video-frame--feature{aspect-ratio:16 / 10;}
+}
+
+/* ---------- Split feature section (copy beside a video card) ---------- */
+.feature-split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.feature-copy .eyebrow{margin-bottom:14px;}
+.feature-copy h2{margin-bottom:18px;}
+.feature-copy p{color:var(--ink-soft); font-size:16.5px; margin-bottom:16px;}
+.feature-copy p:last-of-type{margin-bottom:0;}
+.feature-copy .btn{margin-top:26px;}
+.feature-split--flip .feature-copy{order:2;}
+.feature-split--flip .feature-media{order:1;}
+/* Solid card variant: copy sits on an opaque panel above its section. */
+.feature-copy--panel{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:44px 40px;
+  box-shadow:0 26px 60px rgba(38,20,13,.10);
+}
+@media (max-width:900px){
+  .feature-split{grid-template-columns:1fr; gap:34px;}
+  .feature-split--flip .feature-copy{order:1;}
+  .feature-split--flip .feature-media{order:2;}
+}
+
+/* ---------- Quality: text + process on the left, video on the right ---------- */
+.quality-layout{
+  grid-template-columns:1.05fr .95fr;
+  grid-template-areas:"intro visual" "timeline visual";
+  gap:48px 64px;
+  align-items:start;
+}
+.quality-intro{grid-area:intro; position:static;}
+.q-timeline{grid-area:timeline;}
+.quality-visual{grid-area:visual; position:sticky; top:110px;}
+.quality-visual .video-frame{
+  aspect-ratio:4 / 3;
+  box-shadow:0 26px 60px rgba(38,20,13,.14);
+}
+@media (max-width:900px){
+  .quality-layout{
+    grid-template-columns:1fr;
+    grid-template-areas:"intro" "timeline" "visual";
+    gap:44px;
+  }
+  .quality-visual{position:static;}
+}
+
+/* ---------- Hero scene: video is the primary visual ---------- */
+.hero-scene > .video-poster,
+.hero-scene > .video{z-index:1; border-radius:inherit;}
+.hero-scene > .scene-fallback,
+.hero-scene > .scene-vignette,
+.hero-scene > .scene-loading{z-index:2;}
+.hero-scene.video-failed > .video,
+.hero-scene.video-failed > .video-poster,
+.hero-scene.video-failed .video-layer{display:none !important;}
+.hero-scene.video-static .scene-loading{opacity:0;}
+
+/* ---------- Category card: video sits over the still-life images,
+     the card's own vignette stays on top ---------- */
+.cat-visual > .video-poster,
+.cat-visual > .video{z-index:1;}
+.cat-visual > .video-overlay{z-index:2;}
+.cat-visual::after{z-index:3;}
+
+/* ---------- Section stacking ---------- */
+#export-reach .video-layer{z-index:0;}
+#export-reach .wrap{position:relative; z-index:10;}
+
+.final-cta .video-layer{z-index:0;}
+.final-cta::before{z-index:2;}
+.final-cta .inner{position:relative; z-index:10;}
+.final-cta #cta-particles{z-index:3;}
+.final-cta .cta-ring{z-index:4;}
+
+/* ---------- Decorative status pill on feature media ---------- */
+.video-tag{
+  position:absolute;
+  left:16px; bottom:16px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:rgba(24,21,18,.62);
+  border:1px solid rgba(232,163,23,.34);
+  color:rgba(255,248,234,.86);
+  font-family:'Inter', sans-serif;
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  backdrop-filter:blur(6px);
+  pointer-events:none;
+}
+.video-tag i{
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--turmeric);
+  display:block;
+}
+
+/* ---------- Reduced motion / data saver: poster only, no fades ---------- */
+@media (prefers-reduced-motion: reduce){
+  .video{transition:none;}
+}

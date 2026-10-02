@@ -6,6 +6,8 @@
 <title>Mubarak Mercantile | Indian Products &amp; Global Export</title>
 <meta name="description" content="Mubarak Mercantile is a Tamil Nadu-based sourcing and export company connecting quality Indian products with international buyers, wholesalers, and distributors.">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/video.css">
+<noscript><style>.reveal,.q-step,.final-cta h2 .w,.final-cta .eyebrow,.final-cta p,.final-cta .hero-actions{opacity:1 !important; transform:none !important;} .scene-loading{display:none !important;}</style></noscript>
 </head>
 <body>
 
@@ -28,7 +30,7 @@
     </nav>
     <div class="nav-right">
       <a href="contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
-      <button class="nav-toggle" aria-label="Toggle menu"><span></span></button>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     </div>
   </div>
   <div class="nav-overlay"></div>
@@ -38,59 +40,252 @@
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="wrap hero-inner">
-    <div class="eyebrow">Sourcing &amp; Export House · Est. Tamil Nadu, India</div>
-    <h1>Connecting Quality Indian Products to Global Markets</h1>
-    <p class="lead">Reliable sourcing and export solutions from India, connecting trusted products with international buyers.</p>
-    <div class="hero-actions">
-      <a href="products.html" class="btn btn-gold">Explore Products</a>
-      <a href="contact.html" class="btn btn-ghost-light">Request a Quote</a>
+    <div class="hero-copy">
+      <div class="eyebrow">Sourcing &amp; Export House · Est. Tamil Nadu, India</div>
+      <h1>Connecting Quality Indian Products to <em>Global Markets</em></h1>
+      <p class="lead">Reliable sourcing and export solutions from India, connecting trusted products with international buyers.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-gold">Explore Products</a>
+        <a href="contact.html" class="btn btn-ghost-light">Request a Quote</a>
+      </div>
+
+      <div class="hero-route">
+        <div class="stat"><b data-count="14">0</b><span>Product Lines</span></div>
+        <div class="stat"><b>Tamil&nbsp;Nadu</b><span>Sourcing Base</span></div>
+        <div class="stat"><b>B2B</b><span>Buyers &amp; Distributors</span></div>
+      </div>
     </div>
 
-    <div class="hero-route">
-      <div class="stat"><b>14</b><span>Product Lines</span></div>
-      <div class="stat"><b>Tamil&nbsp;Nadu</b><span>Sourcing Base</span></div>
-      <div class="stat"><b>B2B</b><span>Buyers &amp; Distributors</span></div>
+    <!--
+      Hero card: decorative looping video is the primary visual.
+      No <source> in the markup — js/video-system.js attaches sources only
+      when this video is allowed to play (lazy, single-active), so there is
+      never an autoplay race. Poster stills the card without JS.
+      Fallback chain: video -> WebGL scene (js/spice-scene.js) -> poster.
+      ASSET PLACEHOLDER: public/posters/3d-hero.jpg is a frame grab; replace
+      with a licensed hero photograph of the real product when available.
+    -->
+    <div class="hero-scene" id="hero-scene" aria-hidden="true">
+      <video class="video" data-video="3d-hero" data-mode="hero"
+             poster="public/posters/3d-hero.webp"
+             autoplay muted loop playsinline preload="none"
+             aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
+      <canvas></canvas>
+      <div class="scene-fallback" style="display:none"></div>
+      <div class="scene-vignette"></div>
+      <div class="scene-loading">Preparing the harvest…</div>
     </div>
   </div>
 </section>
 
-<!-- ============ WHAT WE OFFER ============ -->
-<section class="section">
+<!-- ============ PRODUCT CATEGORIES ============ -->
+<section class="section" id="products">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">What We Offer</div>
-      <h2>Built for serious buyers</h2>
-      <p>Every part of our process is designed around one goal — giving international partners a dependable source for quality Indian products.</p>
+    <div class="section-head reveal reveal-slide-l">
+      <div class="eyebrow">Product Categories</div>
+      <h2>From Indian farms to global kitchens</h2>
+      <p>Four focused ranges, prepared and packed for international buyers, wholesalers and distributors.</p>
     </div>
 
-    <div class="grid grid-4">
-      <div class="card reveal">
-        <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2.4 6.9L21 11l-6.6 2.1L12 20l-2.4-6.9L3 11l6.6-2.1z"/></svg>
+    <div class="cat-grid">
+      <a href="products.html" class="cat-card reveal reveal-pop">
+        <div class="cat-visual" style="background:linear-gradient(160deg,#F6EEDC,#EDDFC2);">
+          <!-- Decorative loop over the still-life; the images beneath remain
+               the no-JS / blocked-motion fallback. -->
+          <video class="video" data-video="whole-spice-category-loop" data-mode="contained"
+                 poster="public/posters/whole-spice-category-loop.webp"
+                 autoplay muted loop playsinline preload="none"
+                 aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
+          <div class="combo">
+            <img src="images/products/whole-black-pepper.jpg" alt="Whole black peppercorns" loading="lazy">
+            <img src="images/products/whole-coriander-seeds.jpg" alt="Whole coriander seeds" loading="lazy">
+          </div>
         </div>
-        <h3>Quality Products</h3>
-        <p>Carefully sourced goods, checked for consistency before they reach your order sheet.</p>
+        <div class="cat-body">
+          <h3>Whole Spices</h3>
+          <p>Peppercorns, coriander, cumin and more — sourced whole for buyers who grind and blend in-market.</p>
+          <span class="cat-link">Explore Range <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a href="products.html" class="cat-card reveal reveal-pop">
+        <div class="cat-visual" style="background:linear-gradient(160deg,#F8EFD8,#F0DFAE);">
+          <div class="combo">
+            <img src="images/products/turmeric-powder.jpg" alt="Golden turmeric powder" loading="lazy">
+            <img src="images/products/red-chilli-powder.jpg" alt="Red chilli powder" loading="lazy">
+          </div>
+        </div>
+        <div class="cat-body">
+          <h3>Ground Spices</h3>
+          <p>Turmeric, chilli, cumin and coriander powders — processed and milled to consistent specification.</p>
+          <span class="cat-link">Explore Range <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a href="products.html" class="cat-card reveal reveal-pop">
+        <div class="cat-visual" style="background:linear-gradient(160deg,#F3E2D2,#E8C9AE);">
+          <div class="combo combo-single">
+            <img src="images/products/whole-dried-red-chilli.jpg" alt="Whole dried red chillies" loading="lazy">
+          </div>
+        </div>
+        <div class="cat-body">
+          <h3>Dried Chilies</h3>
+          <p>Whole dried red chillies selected for vibrant colour, aroma and authentic Indian heat.</p>
+          <span class="cat-link">Explore Range <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a href="contact.html" class="cat-card reveal reveal-pop">
+        <div class="cat-visual">
+          <div class="ribbons"></div>
+        </div>
+        <div class="cat-body">
+          <h3>Custom Seasoning Blends</h3>
+          <p>Layered spice blends developed for private-label and food-production partners.</p>
+          <span class="cat-link">Discuss a Blend <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROUND SPICES & CUSTOM BLENDS (feature split) ============ -->
+<section class="section" id="ground-spices">
+  <div class="wrap">
+    <div class="feature-split">
+      <div class="feature-copy reveal reveal-slide-l">
+        <div class="eyebrow">Ground Spices</div>
+        <h2>Milled powders and custom blends</h2>
+        <p>Turmeric, chilli, cumin and coriander powders — processed and milled to consistent specification.</p>
+        <p>Layered spice blends developed for private-label and food-production partners.</p>
+        <a href="products.html" class="btn btn-outline">Explore Range</a>
       </div>
-      <div class="card reveal">
-        <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>
+      <div class="feature-media">
+        <!-- Decorative, non-interactive. Poster holds the frame before the
+             source is attached and when motion is suppressed. -->
+        <div class="video-frame video-frame--feature" aria-hidden="true">
+          <video class="video" data-video="ground-spices-texture-loop" data-mode="contained"
+                 poster="public/posters/ground-spices-texture-loop.webp"
+                 autoplay muted loop playsinline preload="none"
+                 aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
         </div>
-        <h3>Reliable Sourcing</h3>
-        <p>Direct relationships across Indian production regions keep supply steady and predictable.</p>
       </div>
-      <div class="card reveal">
-        <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-        </div>
-        <h3>Export Support</h3>
-        <p>Guidance through documentation, packaging, and shipment coordination for cross-border orders.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUALITY ============ -->
+<section class="section" id="quality" style="background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="quality-layout">
+      <div class="quality-intro reveal reveal-slide-l">
+        <div class="eyebrow">Quality &amp; Processing</div>
+        <h2>Every lot, cared for at every step</h2>
+        <p>Quality isn't a final inspection — it's built into each stage of how we prepare your order, from sourcing to export-ready packing.</p>
       </div>
-      <div class="card reveal">
-        <div class="icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg>
+
+      <div class="q-timeline">
+        <div class="q-step">
+          <div class="q-num">Step 01</div>
+          <h3>Sourcing</h3>
+          <p>Direct relationships across Tamil Nadu's spice-growing regions, so every lot can be traced back to its source.</p>
         </div>
-        <h3>Global Business Partnerships</h3>
-        <p>We work toward long-term relationships with buyers, wholesalers, and distributors abroad.</p>
+        <div class="q-step">
+          <div class="q-num">Step 02</div>
+          <h3>Cleaning</h3>
+          <p>Careful cleaning and sorting to remove dust, stems and foreign matter before anything moves to grading.</p>
+        </div>
+        <div class="q-step">
+          <div class="q-num">Step 03</div>
+          <h3>Grading</h3>
+          <p>Consistent grading by size, colour and aroma, so each shipment matches the specification you agreed.</p>
+        </div>
+        <div class="q-step">
+          <div class="q-num">Step 04</div>
+          <h3>Hygienic Packing</h3>
+          <p>Food-safe, export-appropriate packaging prepared with transit and shelf life in mind.</p>
+        </div>
+        <div class="q-step">
+          <div class="q-num">Step 05</div>
+          <h3>Export Ready</h3>
+          <p>Documentation and coordination handled, so your order moves smoothly from our facility to your market.</p>
+        </div>
+      </div>
+
+      <div class="quality-visual">
+        <div class="video-frame video-frame--panel" aria-hidden="true">
+          <video class="video" data-video="sourcing-and-quality" data-mode="contained" data-overlay="soft"
+                 poster="public/posters/sourcing-and-quality.webp"
+                 autoplay muted loop playsinline preload="none"
+                 aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
+          <span class="video-tag"><i></i> Quality &amp; Processing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPORT REACH ============ -->
+<section class="section section-dark video-host" id="export-reach" style="--video-opacity:.40;">
+  <!-- Decorative background layer; the map, headline and metrics below stay
+       above it (z-index) and are never covered or made non-interactive. -->
+  <video class="video" data-video="world-reach-abstract-animation" data-mode="background"
+         poster="public/posters/world-reach-abstract-animation.webp"
+         autoplay muted loop playsinline preload="none"
+         aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
+  <div class="video-overlay ov-dark" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">Export Reach</div>
+      <h2>Indian Flavour, Delivered Worldwide.</h2>
+      <p>From our Tamil Nadu sourcing base to buyers, wholesalers and distributors across the globe.</p>
+    </div>
+
+    <!-- Gold line-art world map — decorative, generated by js/main.js.
+         Essential content (headline, metrics) lives outside this container. -->
+    <div class="export-map-wrap reveal reveal-pop" id="export-map" aria-hidden="true"></div>
+
+    <div class="export-metrics reveal reveal-pop">
+      <div class="stat"><b>[X]+</b><span>Countries Served</span></div>
+      <div class="stat"><b>[X]+</b><span>Years of Experience</span></div>
+      <div class="stat"><b>[X]+</b><span>Product Categories</span></div>
+    </div>
+    <p class="metric-note reveal reveal-slide-up">Placeholder metrics — to be confirmed by the business before publication.</p>
+  </div>
+</section>
+
+<!-- ============ HERITAGE / ABOUT ============ -->
+<section class="section heritage" id="heritage">
+  <div class="wrap">
+    <div class="heritage-grid">
+      <div class="heritage-copy reveal reveal-slide-l">
+        <div class="eyebrow">Our Heritage</div>
+        <h2>Rooted in Tamil Nadu, built for global buyers</h2>
+        <p>Mubarak Mercantile grew out of Tamil Nadu's spice-growing countryside — a region known for its rich harvests and generations of farming knowledge.</p>
+        <p>Every day, sacks of whole spices arrive from regional farms and markets. They're cleaned, graded and prepared by hand and by careful processing, then packed for the long journey to kitchens, manufacturers and retailers around the world.</p>
+        <p>We keep the human part of the work visible — because trust is built the same way it always has been: lot by lot, order by order.</p>
+        <a href="about.html" class="btn btn-outline" style="margin-top:12px;">Our Story</a>
+      </div>
+
+      <!--
+        ASSET PLACEHOLDER: collage images use existing catalogue photography
+        as stand-ins. Replace with licensed business assets (fields, spice
+        sacks, hands sorting chilies, export packaging) when available.
+      -->
+      <div class="heritage-collage reveal reveal-slide-r" id="heritage-collage">
+        <div class="collage-bg"></div>
+        <figure class="collage-item collage-1">
+          <img src="images/products/whole-coriander-seeds.jpg" alt="Whole coriander seeds — placeholder for sourcing photography" loading="lazy">
+          <figcaption class="ph-tag">Placeholder — farm &amp; field photography</figcaption>
+        </figure>
+        <figure class="collage-item collage-2">
+          <img src="images/products/whole-dried-red-chilli.jpg" alt="Whole dried red chillies — placeholder for sorting photography" loading="lazy">
+          <figcaption class="ph-tag">Placeholder — sorting &amp; grading</figcaption>
+        </figure>
+        <figure class="collage-item collage-3">
+          <img src="images/products/turmeric-powder.jpg" alt="Turmeric powder — placeholder for packaging photography" loading="lazy">
+          <figcaption class="ph-tag">Placeholder — packing &amp; export</figcaption>
+        </figure>
       </div>
     </div>
   </div>
@@ -99,14 +294,14 @@
 <!-- ============ FEATURED PRODUCTS ============ -->
 <section class="section" style="background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head reveal reveal-slide-l">
       <div class="eyebrow">Featured Products</div>
       <h2>A glimpse of our catalogue</h2>
       <p>A selection from our range of 14 product lines. View the full catalogue for details and specifications.</p>
     </div>
 
     <div class="grid grid-3">
-      <div class="product-card reveal" data-product data-name="Whole Dried Red Chilli" data-category="spices">
+      <div class="product-card reveal reveal-pop" data-product data-name="Whole Dried Red Chilli" data-category="spices">
         <div class="product-media"><img src="images/products/whole-dried-red-chilli.jpg" alt="Whole Dried Red Chilli — Mubarak Mercantile" loading="lazy"></div>
         <div class="product-body">
           <span class="product-cat">Spices</span>
@@ -115,7 +310,7 @@
           <a href="contact.html" class="btn btn-outline btn-sm" data-enquire="Whole Dried Red Chilli">Enquire Now</a>
         </div>
       </div>
-      <div class="product-card reveal" data-product data-name="Turmeric Powder" data-category="spices">
+      <div class="product-card reveal reveal-pop" data-product data-name="Turmeric Powder" data-category="spices">
         <div class="product-media"><img src="images/products/turmeric-powder.jpg" alt="Turmeric Powder — Mubarak Mercantile" loading="lazy"></div>
         <div class="product-body">
           <span class="product-cat">Spices</span>
@@ -124,7 +319,7 @@
           <a href="contact.html" class="btn btn-outline btn-sm" data-enquire="Turmeric Powder">Enquire Now</a>
         </div>
       </div>
-      <div class="product-card reveal" data-product data-name="Whole Cumin Seeds" data-category="spices">
+      <div class="product-card reveal reveal-pop" data-product data-name="Whole Cumin Seeds" data-category="spices">
         <div class="product-media"><img src="images/products/whole-cumin-seeds.jpg" alt="Whole Cumin Seeds — Mubarak Mercantile" loading="lazy"></div>
         <div class="product-body">
           <span class="product-cat">Spices</span>
@@ -133,7 +328,7 @@
           <a href="contact.html" class="btn btn-outline btn-sm" data-enquire="Whole Cumin Seeds">Enquire Now</a>
         </div>
       </div>
-      <div class="product-card reveal" data-product data-name="Whole Black Pepper" data-category="spices">
+      <div class="product-card reveal reveal-pop" data-product data-name="Whole Black Pepper" data-category="spices">
         <div class="product-media"><img src="images/products/whole-black-pepper.jpg" alt="Whole Black Pepper — Mubarak Mercantile" loading="lazy"></div>
         <div class="product-body">
           <span class="product-cat">Spices</span>
@@ -142,7 +337,7 @@
           <a href="contact.html" class="btn btn-outline btn-sm" data-enquire="Whole Black Pepper">Enquire Now</a>
         </div>
       </div>
-      <div class="product-card reveal" data-product data-name="Virgin Coconut Oil" data-category="coconut">
+      <div class="product-card reveal reveal-pop" data-product data-name="Virgin Coconut Oil" data-category="coconut">
         <div class="product-media"><img src="images/products/virgin-coconut-oil.jpg" alt="Virgin Coconut Oil — Mubarak Mercantile" loading="lazy"></div>
         <div class="product-body">
           <span class="product-cat">Coconut Products</span>
@@ -151,7 +346,7 @@
           <a href="contact.html" class="btn btn-outline btn-sm" data-enquire="Virgin Coconut Oil">Enquire Now</a>
         </div>
       </div>
-      <div class="product-card reveal" data-product data-name="Desiccated Coconut" data-category="coconut">
+      <div class="product-card reveal reveal-pop" data-product data-name="Desiccated Coconut" data-category="coconut">
         <div class="product-media"><img src="images/products/desiccated-coconut.jpg" alt="Desiccated Coconut — Mubarak Mercantile" loading="lazy"></div>
         <div class="product-body">
           <span class="product-cat">Coconut Products</span>
@@ -171,7 +366,7 @@
 <!-- ============ WHY CHOOSE US ============ -->
 <section class="section">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head reveal reveal-slide-l">
       <div class="eyebrow">Why Choose Us</div>
       <h2>What working with us looks like</h2>
     </div>
@@ -186,12 +381,31 @@
   </div>
 </section>
 
-<!-- ============ CTA ============ -->
-<section class="cta-band">
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta video-host" id="contact-cta" style="--video-opacity:.55;">
+  <!-- Decorative background layer; CTA copy, buttons, rings and particles
+       all render above it. -->
+  <video class="video" data-video="final-cta-background" data-mode="background"
+         poster="public/posters/final-cta-background.webp"
+         autoplay muted loop playsinline preload="none"
+         aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
+  <div class="video-overlay ov-cta" aria-hidden="true"></div>
+  <canvas id="cta-particles" aria-hidden="true"></canvas>
+  <!-- CSS 3D rotating particle rings (decorative) -->
+  <div class="cta-ring" aria-hidden="true">
+    <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span><span style="--i:8"></span><span style="--i:9"></span><span style="--i:10"></span><span style="--i:11"></span>
+  </div>
+  <div class="cta-ring r2" aria-hidden="true">
+    <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span>
+  </div>
   <div class="wrap inner">
-    <h2>Looking for reliable Indian products?</h2>
-    <p>Let's build a long-term business relationship.</p>
-    <a href="contact.html" class="btn btn-gold">Contact Us</a>
+    <div class="eyebrow">Work With Us</div>
+    <h2><span class="w">Let's</span> <span class="w">Bring</span> <span class="w">Authentic</span> <span class="w">Indian</span> <span class="w">Flavour</span> <span class="w">to</span> <span class="w">Your</span> <span class="w">Market.</span></h2>
+    <p>Tell us your product, quantity and destination — our team will prepare a quotation built for your market.</p>
+    <div class="hero-actions">
+      <a href="contact.html" class="btn btn-gold">Request an Export Quote</a>
+      <a href="contact.html" class="btn btn-ghost-light">Talk to Our Team</a>
+    </div>
   </div>
 </section>
 

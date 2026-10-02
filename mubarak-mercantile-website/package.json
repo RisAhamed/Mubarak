@@ -1,0 +1,11 @@
+{
+  "name": "mubarak-mercantile-website",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mubarak Mercantile — premium Indian spice export website (static, no build step required)",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node --check js/main.js && node --check js/spice-scene.js && node --check js/video-system.js && node --check server.js && node scripts/check-assets.mjs && echo Build OK"
+  }
+}
